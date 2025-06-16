@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil Insta Modas</title>
+    <!-- Inclui o Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Ícones Flat Design para a barra inferior -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Define a fonte Inter para todo o corpo e adiciona arredondamento */
+      body {
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-smoothing: grayscale;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Alinha no topo para maximizar o espaço */
+        min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura da viewport */
+        background-color: #fcfcfc; /* Fundo quase branco para um visual ultra clean e futurista */
+      }
+      /* Estilização para a barra inferior, agora dentro do fluxo normal */
+      .bottom-nav {
+        box-shadow: 0 -2px 10px -1px rgba(0, 0, 0, 0.01),
+          0 -1px 4px -1px rgba(0, 0, 0, 0.005); /* Sombra ainda mais sutil */
+        border-top: 1px solid #f3f4f6; /* Borda quase invisível */
+        background-color: #ffffff; /* Fundo branco puro */
+        /* Removidas propriedades 'fixed' para que não corte o conteúdo */
+        width: 100%; /* Garante que ocupe a largura total do container pai */
+        padding-top: 0.75rem; /* py-3 */
+        padding-bottom: 0.75rem; /* py-3 */
+        padding-left: 1rem; /* px-4 */
+        padding-right: 1rem; /* px-4 */
+      }
+      /* Sombra customizada para o card principal, mais leve e etérea */
+      .card-shadow {
+        box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.05),
+          0 4px 12px -4px rgba(0, 0, 0, 0.03);
+        border: 1px solid #f5f5f5; /* Uma borda super sutil para definição */
+      }
+      /* Efeito de hover suave para os botões */
+      .button-hover-effect {
+        transition: background-color 0.3s ease-in-out,
+          box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+      }
+      /* Hover para o botão Editar perfil - agora com tons de cinza/preto */
+      .button-edit:hover {
+        background-color: #e2e8f0; /* Um cinza muito suave no hover */
+        border-color: #cbd5e0; /* Borda um pouco mais visível no hover */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      /* Hover para o botão Compartilhar perfil */
+      .button-share:hover {
+        background-color: #edf2f7; /* Cinza muito suave no hover */
+        border-color: #d1d5db; /* Borda um pouco mais visível no hover */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      }
+      /* Animação para a borda da foto de perfil */
+      @keyframes pulse-gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .profile-border-animated {
+        background-size: 200% 200%;
+        animation: pulse-gradient 3s ease infinite;
+      }
+      /* Efeito de escala e gradiente para ícones da barra de navegação ativos */
+      .nav-icon-active {
+        color: #7c3aed; /* Uma cor mais vibrante para o ativo */
+        transform: scale(1.15); /* Escala ligeiramente maior */
+        background: linear-gradient(
+          45deg,
+          #a78bfa,
+          #fbcfe8
+        ); /* Gradiente lilás/rosa */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* Ajuste para o texto padrão */
+      .text-gray-700 {
+        color: #4a5568; /* Um cinza um pouco mais escuro para melhor legibilidade no fundo claro */
+      }
+      .text-gray-500 {
+        color: #718096; /* Um cinza médio para subtextos */
+      }
+      /* Estilos para os destaques */
+      .highlight-item {
+        width: 60px; /* Tamanho ligeiramente reduzido para o círculo */
+        height: 60px;
+        background-color: #f3f4f6; /* Fundo cinza suave */
+        border: 1px solid #e5e7eb; /* Borda sutil */
+        color: #6b7280; /* Cor do ícone */
+        font-size: 1.8rem; /* Tamanho do emoji ajustado */
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+      .highlight-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Container principal do aplicativo mobile -->
+    <div
+      class="max-w-md w-full bg-white rounded-3xl card-shadow overflow-hidden my-0"
+    >
+      <!-- Removida margem vertical para caber no ecrã -->
+      <!-- Topo do aplicativo -->
+      <header
+        class="p-3 border-b border-gray-100 flex items-center justify-center relative bg-white"
+      >
+        <!-- Reduzido padding -->
+        <!-- Título do aplicativo -->
+        <h1 class="text-xl font-semibold text-gray-800">Moda</h1>
+        <!-- Botões de navegação e configurações no topo (opcional, mas comum) -->
+        <div class="absolute right-3 text-gray-600">
+          <!-- Reduzido right -->
+          <i class="fas fa-ellipsis-h text-lg"></i>
+        </div>
+      </header>
+
+      <!-- Conteúdo principal do perfil -->
+      <main class="p-4">
+        <!-- Reduzido padding -->
+        <!-- Seção da foto de perfil e nomes -->
+        <div class="flex flex-col items-center mb-4">
+          <!-- Reduzido mb -->
+          <!-- Foto de perfil circular com borda suave, gradiente pastel e animação -->
+          <div
+            class="w-28 h-28 rounded-full bg-gradient-to-br from-purple-200 to-pink-200 p-1 mb-3 shadow-md profile-border-animated"
+          >
+            <!-- Reduzido mb -->
+            <img
+              src="https://i.imgur.com/ZArKlDr.jpeg"
+              alt="Foto de Perfil"
+              class="w-full h-full rounded-full object-cover border-4 border-white"
+            />
+          </div>
+          <!-- Nome do usuário -->
+          <h2 class="text-2xl font-bold text-gray-800 tracking-tight">
+            Risos & Estilos
+          </h2>
+          <!-- Tamanho de fonte ligeiramente reduzido para economizar espaço -->
+          <!-- @username -->
+          <p class="text-sm text-gray-500 mb-2">@Risos&Estilos</p>
+          <!-- Reduzido mb -->
+          <!-- Biografia curta com emojis -->
+          <p
+            id="bioText"
+            class="text-center text-gray-700 text-base leading-relaxed px-4"
+          >
+            ✨ O arraiá da Moda Fina! 🤠🌽 💖
+          </p>
+        </div>
+
+        <!-- Contadores de Posts, Seguidores, Seguindo -->
+        <div
+          class="flex justify-around items-center text-center mb-4 border-y border-gray-100 py-3 bg-gray-50 rounded-lg mx-auto"
+        >
+          <!-- Reduzido mb, py -->
+          <div class="flex flex-col">
+            <span class="font-bold text-xl text-gray-800">3</span>
+            <span class="text-sm text-gray-500">Posts</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-xl text-gray-800">1.2K</span>
+            <span class="text-sm text-gray-500">Seguidores</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-xl text-gray-800">345</span>
+            <span class="text-sm text-gray-500">Seguindo</span>
+          </div>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="flex justify-center space-x-3 mb-6 px-3">
+          <!-- Reduzido mb, px -->
+          <button
+            class="flex-1 bg-white text-gray-800 font-semibold py-2.5 px-4 rounded-full border border-gray-300 button-hover-effect button-edit"
+          >
+            <!-- Reduzido py, px -->
+            Editar perfil
+          </button>
+          <button
+            class="flex-1 bg-white text-gray-600 font-semibold py-2.5 px-4 rounded-full border border-gray-200 button-hover-effect button-share"
+          >
+            <!-- Reduzido py, px -->
+            Compartilhar perfil
+          </button>
+        </div>
+
+        <!-- Seção de Destaques (Highlights) com emojis de loja -->
+        <div class="mb-6 px-1">
+          <!-- Reduzido mb, px -->
+          <h3 class="text-base font-semibold text-gray-700 mb-3 text-center">
+            Destaques da Loja
+          </h3>
+          <!-- Reduzido font-size, mb -->
+          <div
+            class="flex justify-around items-center space-x-3 overflow-x-auto pb-1"
+          >
+            <!-- Reduzido space-x, pb -->
+            <div class="flex flex-col items-center">
+              <div
+                class="highlight-item rounded-full flex items-center justify-center shadow-sm"
+              >
+                ✨
+              </div>
+              <span class="text-xs text-gray-600 mt-1">Novidades</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="highlight-item rounded-full flex items-center justify-center shadow-sm"
+              >
+                👗
+              </div>
+              <span class="text-xs text-gray-600 mt-1">Coleções</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="highlight-item rounded-full flex items-center justify-center shadow-sm"
+              >
+                👒
+              </div>
+              <span class="text-xs text-gray-600 mt-1">Acessórios</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="highlight-item rounded-full flex items-center justify-center shadow-sm"
+              >
+                🏷️
+              </div>
+              <span class="text-xs text-gray-600 mt-1">Promoções</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <div
+                class="highlight-item rounded-full flex items-center justify-center shadow-sm"
+              >
+                🏆
+              </div>
+              <span class="text-xs text-gray-600 mt-1">Mais Vendidos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grade de imagens (posts) com apenas 3 imagens -->
+        <div class="grid grid-cols-3 gap-1.5">
+          <!-- Reduzido gap -->
+          <!-- Imagem do Post 1 atualizada -->
+          <img
+            src="https://i.imgur.com/ERmn4nw.jpeg"
+            alt="Post 1"
+            class="w-full h-full object-cover aspect-square rounded-lg shadow-sm"
+          />
+          <!-- Imagem do Post 2 atualizada -->
+          <img
+            src="https://i.imgur.com/yUkU0UA.jpeg"
+            alt="Post 2"
+            class="w-full h-full object-cover aspect-square rounded-lg shadow-sm"
+          />
+          <!-- Imagem do Post 3 atualizada -->
+          <img
+            src="https://i.imgur.com/kZ9rE76.jpeg"
+            alt="Post 3"
+            class="w-full h-full object-cover aspect-square rounded-lg shadow-sm"
+          />
+        </div>
+      </main>
+
+      <!-- Barra inferior de navegação - agora integrada ao fluxo normal, sem ser fixed -->
+      <footer
+        class="bottom-nav bg-white flex justify-around items-center z-10 border-t border-gray-100"
+      >
+        <a
+          href="#"
+          class="flex flex-col items-center text-gray-500 hover:text-purple-600 transition duration-200 py-2"
+        >
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs mt-0.5">Home</span>
+        </a>
+        <a
+          href="#"
+          class="flex flex-col items-center text-gray-500 hover:text-purple-600 transition duration-200 py-2"
+        >
+          <i class="fas fa-search text-xl"></i>
+          <span class="text-xs mt-0.5">Buscar</span>
+        </a>
+        <a
+          href="#"
+          class="flex flex-col items-center text-gray-500 hover:text-purple-600 transition duration-200 py-2"
+        >
+          <i class="fas fa-plus-square text-xl"></i>
+          <span class="text-xs mt-0.5">Criar</span>
+        </a>
+        <a
+          href="#"
+          class="flex flex-col items-center text-gray-500 hover:text-purple-600 transition duration-200 py-2"
+        >
+          <i class="fas fa-heart text-xl"></i>
+          <span class="text-xs mt-0.5">Notificações</span>
+        </a>
+        <a
+          href="#"
+          class="flex flex-col items-center text-gray-500 hover:text-purple-600 transition duration-200 nav-icon-active py-2"
+        >
+          <i class="fas fa-user text-xl"></i>
+          <span class="text-xs mt-0.5">Perfil</span>
+        </a>
+      </footer>
+    </div>
+
+    <script>
+      // Não há mais necessidade de referências ou eventos para o botão de geração de bio com IA.
+    </script>
+  </body>
+</html>
